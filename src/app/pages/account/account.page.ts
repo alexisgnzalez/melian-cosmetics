@@ -2,11 +2,12 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms'
 import { AuthSession } from '@supabase/supabase-js'
 import { Profile, SupabaseService } from '../../services/supabase/supabase.service'
+import { AvatarComponent } from '../../components/avatar/avatar.component';
 
 @Component({
   selector: 'app-account',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, AvatarComponent],
   templateUrl: './account.page.html',
   styleUrl: './account.page.scss'
 })
@@ -88,5 +89,16 @@ export class AccountPage implements OnInit {
 
   async signOut() {
     await this.supabase.signOut()
+  }
+
+  get avatarUrl() {
+    return this.updateProfileForm.value.avatar_url as string
+  }
+
+  async updateAvatar(event: string): Promise<void> {
+    this.updateProfileForm.patchValue({
+      avatar_url: event,
+    })
+    await this.updateProfile()
   }
 }
