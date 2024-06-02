@@ -8,6 +8,7 @@ import {
   User,
 } from '@supabase/supabase-js'
 import { environment } from '../../../environments/environment'
+import { Router } from '@angular/router'
 
 export interface Profile {
   id?: string
@@ -23,7 +24,7 @@ export class SupabaseService {
   private supabase: SupabaseClient
   _session: AuthSession | null = null
 
-  constructor() {
+  constructor(private router: Router) {
     this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey)
   }
 
@@ -43,12 +44,13 @@ export class SupabaseService {
   }
 
   authChanges(callback: (event: AuthChangeEvent, session: Session | null) => void) {
-    console.log('auth está cambiando', this.session)
     return this.supabase.auth.onAuthStateChange(callback)
   }
 
   signIn(email: string) {
-    return this.supabase.auth.signInWithOtp({ email })
+    return this.supabase.auth.signInWithOtp(
+      { email }
+    )
   }
 
   signOut() {

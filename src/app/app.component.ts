@@ -14,17 +14,15 @@ import { CommonModule } from '@angular/common';
 })
 export class AppComponent {
   title = 'melian-cosmetics';
-  session = this.supabase.session;
 
   constructor(private readonly supabase: SupabaseService, private router: Router) {}
 
   ngOnInit() {
-    this.supabase.authChanges((_, session) => {
-        this.session = session
-        console.log(this.session)
-        // if (session) this.router.navigate(['account']);
-        this.router.navigate(['account']);
-      }
-    )
+    this.supabase.authChanges((event, session) => {
+      console.log('cuando se hace login', event, session)
+      console.log('session', this.supabase.session)
+      if (session) this.router.navigate(['/account'])
+    }
+  )
   }
 }
