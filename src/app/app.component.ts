@@ -19,10 +19,10 @@ export class AppComponent {
 
   ngOnInit() {
     this.supabase.authChanges((event, session) => {
-      console.log('cuando se hace login', event, session)
-      console.log('session', this.supabase.session)
-      if (session) this.router.navigate(['/account'])
-    }
-  )
+        console.log('cuando se hace login', event, session)
+        console.log('session', this.supabase.session)
+        if (session) this.router.navigate(['/account'])
+      }
+    )
   }
 }
