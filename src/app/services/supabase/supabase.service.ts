@@ -17,6 +17,19 @@ export interface Profile {
   avatar_url: string
 }
 
+export interface Product {
+  capid: string,
+  name: string,
+  capprice: number,
+  quantity: number,
+  delivery: number,
+  suggestedprice: number,
+  price: number,
+  imageurl: string,
+  discount: number,
+  soldquantity: number
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -64,6 +77,15 @@ export class SupabaseService {
     }
 
     return this.supabase.from('profiles').upsert(update)
+  }
+
+  insertProduct(product: Product) {
+    const insertData = {
+      ...product,
+      updated_at: new Date()
+    }
+    console.log('datiando ->', insertData)
+    return this.supabase.from('products').insert(insertData);
   }
 
   downLoadImage(path: string) {
