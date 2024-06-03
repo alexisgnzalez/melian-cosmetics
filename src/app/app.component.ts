@@ -16,13 +16,14 @@ export class AppComponent {
   title = 'melian-cosmetics';
   session = this.supabase.session
   
-  constructor(private readonly supabase: SupabaseService) {}
+  constructor(private readonly supabase: SupabaseService, private router: Router) {}
 
   ngOnInit() {
     this.supabase.authChanges((event, session) => {
         console.log('cuando se hace login', event, session)
         console.log('session', this.supabase.session)
         this.session = session
+        this.router.navigate(['/product-list'])
       }
     )
   }

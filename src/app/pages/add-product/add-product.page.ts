@@ -77,6 +77,5 @@ export class AddProductPage {
     this.form.patchValue({
       imageUrl: event,
     })
-    // await this.updateProfile()
   }
 }
