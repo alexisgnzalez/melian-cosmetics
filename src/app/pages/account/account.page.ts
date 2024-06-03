@@ -15,7 +15,8 @@ import { AvatarComponent } from '../../components/avatar/avatar.component';
 export class AccountPage implements OnInit {
   loading = false
   profile!: Profile
-  session: AuthSession | null
+  @Input()
+  session!: AuthSession
   
 
   updateProfileForm = this.formBuilder.group({
@@ -27,9 +28,7 @@ export class AccountPage implements OnInit {
   constructor(
     private readonly supabase: SupabaseService,
     private formBuilder: FormBuilder
-  ) {
-    this.session = this.supabase.session;
-  }
+  ) {}
 
   async ngOnInit(): Promise<void> {
     await this.getProfile()
@@ -45,8 +44,8 @@ export class AccountPage implements OnInit {
   async getProfile() {
     try {
       this.loading = true
-      const { user } = this.session!
-      console.log('user', user)
+      const { user } = this.session
+      console.log('user ->', user)
       const { data: profile, error, status } = await this.supabase.profile(user)
       
       if (error && status !== 406) {

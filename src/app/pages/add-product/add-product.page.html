@@ -1,4 +1,7 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+  <app-product-image-upload [productImageUrl]="productImageUrl" (upload)="updateProductImage($event)"></app-product-image-upload>
+
   <div>
     <label for="capId">Cap ID:</label>
     <input type="text" formControlName="capId">
@@ -47,7 +50,7 @@
   
   <div>
     <label for="image">Image:</label>
-    <input type="text" formControlName="image">
+    <input type="text" formControlName="imageUrl">
   </div>
   
   <button type="submit">Submit</button>

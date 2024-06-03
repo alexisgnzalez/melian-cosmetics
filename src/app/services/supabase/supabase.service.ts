@@ -73,4 +73,12 @@ export class SupabaseService {
   uploadAvatar(filePath: string, file: File) {
     return this.supabase.storage.from('avatars').upload(filePath, file)
   }
+
+  uploadProductImage(filePath: string, file: File) {
+    return this.supabase.storage.from('product-images').upload(filePath, file)
+  }
+
+  downloadProductImage(path: string) {
+    return this.supabase.storage.from('product-images').download(path)
+  }
 }
