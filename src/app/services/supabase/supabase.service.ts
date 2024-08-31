@@ -32,8 +32,12 @@ export interface Product {
 
 export interface ProductData {
   id: number,
-  capid: string,
-  name: string
+  name: string,
+  quantity: number,
+  price: number,
+  discount: number,
+  imageurl: string,
+  soldquantity: number
 }
 
 @Injectable({
@@ -63,7 +67,7 @@ export class SupabaseService {
   }
 
   products() {
-    return this.supabase.from('products').select(`id, capid, name`)
+    return this.supabase.from('products').select(`id, name, quantity, price, discount, imageurl, soldquantity`)
   }
 
   authChanges(callback: (event: AuthChangeEvent, session: Session | null) => void) {

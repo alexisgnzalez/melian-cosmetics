@@ -1,1 +1,8 @@
-<p>product-list works!</p>
+<ng-container *ngFor="let product of products; index as i">
+  <div>
+    <img style="width: 200px;" [src]="mainUrl + product.imageurl" alt="product image">
+    <div>{{product.name}}</div>
+    <div>{{product.price}}</div>
+    <div>{{product.quantity > product.soldquantity ? 'Disponible' : 'No Disponible' }}</div>
+  </div>
+</ng-container>

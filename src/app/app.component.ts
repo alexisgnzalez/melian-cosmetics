@@ -23,7 +23,7 @@ export class AppComponent {
         console.log('cuando se hace login', event, session)
         console.log('session', this.supabase.session)
         this.session = session
-        this.router.navigate(['/product-list'])
+        if (this.session) this.router.navigate(['/product-list'])
       }
     )
   }
