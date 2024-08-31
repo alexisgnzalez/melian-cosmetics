@@ -13,10 +13,16 @@ export class AuthService {
 
   constructor() { }
 
-  public async login(emailAddress: string, password: string) {
+  async login(emailAddress: string, password: string) {
     const pb = new PocketBase(environment.baseUrl);
     const authData = await pb.collection('users').authWithPassword(emailAddress, password);
     this.userSubject.next({ isValid: pb.authStore.isValid, authModel: pb.authStore.model, token: pb.authStore.token });
+    console.log({ isValid: pb.authStore.isValid, authModel: pb.authStore.model, token: pb.authStore.token });
     return pb.authStore.isValid;
+  }
+
+  logout() {
+    const pb = new PocketBase(environment.baseUrl);
+    return pb.authStore.clear();
   }
 }

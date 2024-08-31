@@ -1,1 +1,10 @@
-<p>login works!</p>
+<div>
+  <input type="text" [(ngModel)]="emailAddress" placeholder="Email Address">
+  <input type="text" [(ngModel)]="password" placeholder="Password">
+  <div>
+    <button type="button" [disabled]="emailAddress == '' || password == ''" (click)="login()">Login</button>
+    <div *ngIf="displayError">An error occur during login, Please try again.</div>
+  </div>
+</div>
+
+
