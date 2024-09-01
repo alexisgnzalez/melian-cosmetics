@@ -25,4 +25,5 @@ export class AuthService {
     const pb = new PocketBase(environment.baseUrl);
     return pb.authStore.clear();
   }
+
 }
