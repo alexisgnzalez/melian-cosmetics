@@ -13,7 +13,6 @@ export class ProductsService {
     const pb = new PocketBase(environment.baseUrl);
     // you can also fetch all records at once via getFullList
     const resultList = await pb.collection('products').getFullList();
-    console.log(resultList);
     return resultList;
   }
 }
