@@ -2,7 +2,7 @@ import { Component, computed, input } from '@angular/core';
 import { Product } from '../../interfaces/product';
 import {MatCardModule} from '@angular/material/card';
 import { CommonModule } from '@angular/common';
-import { environment } from '../../../environments/environment.development';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-product',
