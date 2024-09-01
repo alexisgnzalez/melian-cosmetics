@@ -1,1 +1,20 @@
-<p>product works!</p>
+<mat-card class="product-card">
+  <img [src]="baseUrl+product().collectionId+'/'+product().id+'/'+product().images[0]" mat-card-image alt="Product pic" width="230" height="230">
+  <div class="discountLabel" *ngIf="!(product().available <= 0) && product().discount > 0">{{ (product().discount / 100 | percent) + 'off'}}</div>
+  <mat-card-content>
+    <div class="name">{{ product().name }}</div>
+    <div class="availability" [class.outOfStock]="product().available <= 0">
+      {{ product().available <= 0 ? 'Agotado 🫥' : 'Disponible'}}
+    </div>
+    <div class="price">
+      <span [class.crossOut]="!(product().available <= 0) && product().discount > 0">
+        {{ product().sellingPrice | currency }}
+      </span>
+
+      <span class="discount" *ngIf="!(product().available <= 0) && product().discount > 0">
+        {{ discount() | currency }}
+      </span>
+    </div>
+  </mat-card-content>
+</mat-card>
+

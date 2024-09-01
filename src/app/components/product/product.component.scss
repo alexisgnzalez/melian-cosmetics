@@ -1,0 +1,46 @@
+.product-card {
+  max-width: 230px;
+  border: unset;
+  border-radius: 5px;
+  box-shadow: unset;
+  background-color: #FFFA;
+  position: relative;
+  .discountLabel {
+    position: absolute; /* Position the label absolutely within the container */
+    top: 5px; /* Adjust the top position as needed */
+    right: 5px; /* Adjust the left position as needed */
+    background-color: purple; /* Change background color for better visibility */
+    color: white; /* Change text color for contrast */
+    font-weight: bold; /* Make the discount percentage stand out */
+    padding: 5px 10px; /* Add some padding around the text */
+    border-radius: 5px; /* Add a slight border radius for aesthetics */
+  }
+  img {
+    max-height: 230px;
+    overflow: hidden;
+  }
+  mat-card-content {
+    padding: unset;
+    .name {
+      font-size: medium;
+    }
+    .availability {
+      color: #707072;
+      font-size: small;
+      margin-bottom: 12px;
+      &.outOfStock {
+        color: #eb8686;
+      }
+    }
+    .price {
+      font-size: medium;
+      .crossOut {
+        text-decoration:line-through;
+      }
+      .discount {
+        margin-left: 4px;
+        color: purple;
+      }
+    }
+  }
+}

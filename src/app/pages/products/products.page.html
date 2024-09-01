@@ -1,1 +1,8 @@
-<p>products works!</p>
+<div class="products-container">
+  @for (product of products(); track product.name) {
+    <app-product [product]="product">
+    </app-product>
+  } @empty {
+    Empty list of products
+  }
+</div>
