@@ -11,7 +11,7 @@ export class ProductsService {
 
   async getProducts() {
     const pb = new PocketBase(environment.baseUrl);
-    const resultList = await pb.collection('products').getList(1, 50);
+    const resultList = await pb.collection('products').getList(1, 20);
     console.log(resultList);
     return resultList;
   }
