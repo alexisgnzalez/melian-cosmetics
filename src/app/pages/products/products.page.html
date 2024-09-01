@@ -1,8 +1,29 @@
-<div class="products-container">
-  @for (product of products(); track product.name) {
-    <app-product [product]="product">
-    </app-product>
-  } @empty {
-    Empty list of products
-  }
-</div>
+<mat-tab-group>
+  <mat-tab label="Maquillaje">
+    <div class="products-container">
+      @for (product of products() | filterByCategory : '!skincare'; track product.name) {
+        <app-product [product]="product">
+        </app-product>
+      } @empty {
+        <div style="color: #454545;">
+          No hay productos disponbles en este momento
+        </div>
+      }
+    </div>
+  </mat-tab>
+  <mat-tab label="Cuidado de la Piel">
+    <div class="products-container">
+      @for (product of products() | filterByCategory : 'skincare'; track product.name) {
+        <app-product [product]="product">
+        </app-product>
+      } @empty {
+        <div style="color: #454545">
+          No hay productos disponbles en este momento
+        </div>
+      }
+    </div>
+  </mat-tab>
+  <mat-tab label="Contacto">
+    
+  </mat-tab>
+</mat-tab-group>
