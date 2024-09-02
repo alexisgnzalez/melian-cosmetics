@@ -11,7 +11,6 @@ export class ProductsService {
 
   async getProducts() {
     const pb = new PocketBase(environment.baseUrl);
-    // you can also fetch all records at once via getFullList
     const resultList = await pb.collection('products').getFullList();
     return resultList;
   }
