@@ -7,11 +7,12 @@ import { FilterByCategoryPipe } from '../../pipes/filter-by-category.pipe';
 import { CategoryTitleComponent } from '../../components/category-title/category-title.component';
 import { CommonModule } from '@angular/common';
 import { HammerModule } from '@angular/platform-browser';
+import { ContactInfoComponent } from '../../components/contact-info/contact-info.component';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [ProductComponent, MatTabsModule, FilterByCategoryPipe, CategoryTitleComponent, CommonModule, HammerModule],
+  imports: [ProductComponent, MatTabsModule, FilterByCategoryPipe, CategoryTitleComponent, CommonModule, HammerModule, ContactInfoComponent],
   templateUrl: './products.page.html',
   styleUrl: './products.page.scss'
 })
