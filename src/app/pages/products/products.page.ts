@@ -6,11 +6,12 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { FilterByCategoryPipe } from '../../pipes/filter-by-category.pipe';
 import { CategoryTitleComponent } from '../../components/category-title/category-title.component';
 import { CommonModule } from '@angular/common';
+import { HammerModule } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [ProductComponent, MatTabsModule, FilterByCategoryPipe, CategoryTitleComponent, CommonModule],
+  imports: [ProductComponent, MatTabsModule, FilterByCategoryPipe, CategoryTitleComponent, CommonModule, HammerModule],
   templateUrl: './products.page.html',
   styleUrl: './products.page.scss'
 })
@@ -49,7 +50,11 @@ export class ProductsPage implements OnInit {
     });   
   }
 
-  iroliando(event: any) {
-    console.log(event);
+  onSwipeLeft() {
+    console.log('going left');
+  }
+  
+  onSwipeRight() {
+    console.log('going right')
   }
 }

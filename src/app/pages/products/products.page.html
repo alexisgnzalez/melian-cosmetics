@@ -2,7 +2,7 @@
   <mat-tab label="Maquillaje">
     @for (item of categories; track item.category) {
       <app-category-title [category]="item.title"></app-category-title>
-      <div class="products-container" (swipe)="iroliando($event)">
+      <div class="products-container">
         @for (product of products() | filterByCategory : '!skincare' | filterByCategory : item.category; track product.name) {
           <app-product [product]="product">
           </app-product>
