@@ -20,10 +20,10 @@ $melian-theme: mat.define-theme((
 :root {
   @include mat.all-component-themes($melian-theme);
   
-  --melian-primary: #000000;
-  --melian-accent: #ffffff;
-  --melian-bg-light: #ffffff;
-  --melian-text-main: #000000;
+  --melian-primary: #5e1262; /* Brand Deep Purple */
+  --melian-accent: #d4af37; /* Metallic Gold */
+  --melian-bg-light: #fcfbfc; /* Pearl White */
+  --melian-text-main: #333333;
   --melian-text-muted: #666666;
 }
 
