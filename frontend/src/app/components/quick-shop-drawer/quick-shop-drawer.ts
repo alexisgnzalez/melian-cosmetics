@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, signal } from '@angular/core';
+import { Component, Input, Output, EventEmitter, signal, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -13,16 +13,42 @@ import { PocketbaseService } from '../../services/pocketbase.service';
   templateUrl: './quick-shop-drawer.html',
   styleUrl: './quick-shop-drawer.scss'
 })
-export class QuickShopDrawer {
+export class QuickShopDrawer implements OnInit {
   @Input({ required: true }) product!: Product;
   @Output() close = new EventEmitter<void>();
 
   quantity = signal(1);
+  rating = 0;
+  reviews = 0;
+  fullStars: number[] = [];
+  hasHalfStar = false;
 
   constructor(
     private cartService: CartService,
     private pbService: PocketbaseService
   ) {}
+
+  private hashCode(str: string): number {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+      const char = str.charCodeAt(i);
+      hash = ((hash << 5) - hash) + char;
+      hash = hash & hash;
+    }
+    return Math.abs(hash);
+  }
+
+  ngOnInit() {
+    const hash = this.hashCode(this.product.id);
+    
+    const ratingOptions = [4.0, 4.5, 5.0];
+    this.rating = ratingOptions[hash % ratingOptions.length];
+    this.reviews = (hash % 800) + 15;
+
+    const fullCount = Math.floor(this.rating);
+    this.fullStars = Array(fullCount).fill(0);
+    this.hasHalfStar = this.rating % 1 !== 0;
+  }
 
   get imageUrl(): string {
     if (this.product.images && this.product.images.length > 0) {

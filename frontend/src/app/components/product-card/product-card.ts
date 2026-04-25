@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,15 +14,42 @@ import { DrawerService } from '../../services/drawer.service';
   templateUrl: './product-card.html',
   styleUrl: './product-card.scss'
 })
-export class ProductCard {
+export class ProductCard implements OnInit {
   @Input({ required: true }) product!: Product;
   isAdded = false;
+  rating = 0;
+  reviews = 0;
+  fullStars: number[] = [];
+  hasHalfStar = false;
 
   constructor(
     private pbService: PocketbaseService,
     private cartService: CartService,
     private drawerService: DrawerService
   ) {}
+
+  private hashCode(str: string): number {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+      const char = str.charCodeAt(i);
+      hash = ((hash << 5) - hash) + char;
+      hash = hash & hash;
+    }
+    return Math.abs(hash);
+  }
+
+  ngOnInit() {
+    const hash = this.hashCode(this.product.id);
+    
+    // Rating between 4.0 and 5.0 (steps of 0.5)
+    const ratingOptions = [4.0, 4.5, 5.0];
+    this.rating = ratingOptions[hash % ratingOptions.length];
+    this.reviews = (hash % 800) + 15;
+
+    const fullCount = Math.floor(this.rating);
+    this.fullStars = Array(fullCount).fill(0);
+    this.hasHalfStar = this.rating % 1 !== 0;
+  }
 
   get imageUrl(): string {
     if (this.product.images && this.product.images.length > 0) {

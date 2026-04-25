@@ -1,4 +1,12 @@
 <div class="product-grid-container">
+  @if (!loading() && uniqueCategories().length > 0) {
+    <app-category-nav 
+      [categories]="uniqueCategories()" 
+      [activeCategory]="activeCategory"
+      (categoryChange)="onCategoryChange($event)">
+    </app-category-nav>
+  }
+
   @if (loading()) {
     <div class="loading-state">Loading products...</div>
   } @else if (filteredProducts().length === 0) {

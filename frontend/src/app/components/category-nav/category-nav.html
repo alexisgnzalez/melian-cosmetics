@@ -1,0 +1,19 @@
+<div class="category-nav-container">
+  <div class="category-scroll-wrapper">
+    <button 
+      class="category-chip" 
+      [class.active]="activeCategory === 'All'"
+      (click)="selectCategory('All')">
+      {{ getTranslatedCategory('All') }}
+    </button>
+    
+    @for (category of categories; track category) {
+      <button 
+        class="category-chip" 
+        [class.active]="activeCategory === category"
+        (click)="selectCategory(category)">
+        {{ getTranslatedCategory(category) }}
+      </button>
+    }
+  </div>
+</div>

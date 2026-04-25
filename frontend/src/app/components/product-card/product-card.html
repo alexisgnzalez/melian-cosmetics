@@ -18,12 +18,13 @@
   <div class="product-details">
     <h3 class="product-name">{{ product.name }}</h3>
     <div class="product-rating">
-      <mat-icon>star</mat-icon>
-      <mat-icon>star</mat-icon>
-      <mat-icon>star</mat-icon>
-      <mat-icon>star</mat-icon>
-      <mat-icon>star_half</mat-icon>
-      <span class="review-count">(124)</span>
+      @for (star of fullStars; track $index) {
+        <mat-icon>star</mat-icon>
+      }
+      @if (hasHalfStar) {
+        <mat-icon>star_half</mat-icon>
+      }
+      <span class="review-count">({{reviews}})</span>
     </div>
     <div class="price-container">
       @if (product.discount > 0) {
