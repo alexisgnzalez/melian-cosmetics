@@ -1,0 +1,13 @@
+<div class="product-grid-container">
+  @if (loading()) {
+    <div class="loading-state">Loading products...</div>
+  } @else if (filteredProducts().length === 0) {
+    <div class="empty-state">No products found.</div>
+  } @else {
+    <div class="grid">
+      @for (product of filteredProducts(); track product.id) {
+        <app-product-card [product]="product"></app-product-card>
+      }
+    </div>
+  }
+</div>

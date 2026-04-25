@@ -1,0 +1,45 @@
+<mat-sidenav-container class="app-container" autosize>
+  
+  <mat-sidenav 
+    #rightSidenav 
+    mode="over" 
+    position="end" 
+    class="cart-sidenav"
+    [opened]="drawerService.activeDrawer() !== 'none'"
+    (openedChange)="$event ? null : drawerService.closeDrawer()">
+    
+    @if (drawerService.activeDrawer() === 'cart') {
+      <app-cart-drawer (close)="drawerService.closeDrawer()"></app-cart-drawer>
+    } @else if (drawerService.activeDrawer() === 'quick-shop') {
+      @if (drawerService.quickShopProduct(); as product) {
+        <app-quick-shop-drawer 
+          [product]="product" 
+          (close)="drawerService.closeDrawer()">
+        </app-quick-shop-drawer>
+      }
+    }
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar class="app-toolbar" color="primary">
+      <span class="brand-title">{{ title() }}</span>
+      
+      <span class="spacer"></span>
+      
+      <div class="search-container">
+        <mat-icon class="search-icon">search</mat-icon>
+        <input type="text" placeholder="Buscar todos los productos..." class="search-input" (input)="onSearch($event)">
+      </div>
+      
+      <span class="spacer"></span>
+      <button mat-icon-button (click)="drawerService.toggleCart()" aria-label="Toggle cart">
+        <mat-icon [matBadge]="cartService.totalItems()" matBadgeColor="accent" [matBadgeHidden]="cartService.totalItems() === 0">shopping_bag</mat-icon>
+      </button>
+    </mat-toolbar>
+
+    <main class="main-content">
+      <app-product-grid></app-product-grid>
+    </main>
+  </mat-sidenav-content>
+  
+</mat-sidenav-container>

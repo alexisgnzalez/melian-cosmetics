@@ -1,0 +1,35 @@
+<div class="product-card" (click)="openQuickShop()">
+  <div class="image-container">
+    <img [src]="imageUrl" [alt]="product.name">
+    
+    @if (cartQuantity > 0) {
+      <div class="cart-badge">
+        <mat-icon>shopping_bag</mat-icon>
+        <span class="count">{{ cartQuantity }}</span>
+      </div>
+    }
+
+    <div class="quick-shop-overlay">
+      <button class="quick-shop-btn" (click)="addToCart($event)" [disabled]="product.available <= 0">
+        AGREGAR A LA BOLSA
+      </button>
+    </div>
+  </div>
+  <div class="product-details">
+    <h3 class="product-name">{{ product.name }}</h3>
+    <div class="product-rating">
+      <mat-icon>star</mat-icon>
+      <mat-icon>star</mat-icon>
+      <mat-icon>star</mat-icon>
+      <mat-icon>star</mat-icon>
+      <mat-icon>star_half</mat-icon>
+      <span class="review-count">(124)</span>
+    </div>
+    <div class="price-container">
+      @if (product.discount > 0) {
+        <span class="original-price">${{ product.sellingPrice }}</span>
+      }
+      <span class="final-price">${{ finalPrice }}</span>
+    </div>
+  </div>
+</div>

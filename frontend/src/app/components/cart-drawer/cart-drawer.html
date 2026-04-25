@@ -1,0 +1,61 @@
+<div class="cart-header">
+  <h2>Tu Bolsa ({{ cartService.totalItems() }})</h2>
+  <button mat-icon-button (click)="close.emit()" aria-label="Close cart">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<mat-divider></mat-divider>
+
+<div class="cart-content">
+  @if (cartService.items().length === 0) {
+    <div class="empty-cart">
+      <mat-icon class="empty-icon">shopping_bag</mat-icon>
+      <p>Tu bolsa está vacía.</p>
+      <button class="continue-shopping-btn" (click)="close.emit()">CONTINUAR COMPRANDO</button>
+    </div>
+  } @else {
+    <div class="cart-items">
+      @for (item of cartService.items(); track item.product.id) {
+        <div class="cart-item">
+          <img [src]="getImageUrl(item)" [alt]="item.product.name" class="item-image">
+          <div class="item-details">
+            <div class="item-title-row">
+              <h4>{{ item.product.name }}</h4>
+              <button mat-icon-button class="remove-btn" (click)="removeItem(item.product.id)">
+                <mat-icon>delete_outline</mat-icon>
+              </button>
+            </div>
+            <div class="item-price">${{ item.product.sellingPrice - (item.product.discount || 0) }}</div>
+            <div class="quantity-controls">
+              <button mat-icon-button (click)="updateQuantity(item.product.id, item.quantity - 1)">
+                <mat-icon>remove</mat-icon>
+              </button>
+              <span>{{ item.quantity }}</span>
+              <button mat-icon-button (click)="updateQuantity(item.product.id, item.quantity + 1)">
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+      }
+    </div>
+  }
+</div>
+
+@if (cartService.items().length > 0) {
+  <div class="cart-footer">
+    <div class="subtotal">
+      <span>Subtotal</span>
+      <span class="price">${{ cartService.totalPrice() }}</span>
+    </div>
+    <p class="shipping-notice">Envío e impuestos calculados al pagar</p>
+    <button class="checkout-btn" (click)="checkout()">
+      PAGAR
+    </button>
+    <button class="continue-shopping-btn" (click)="close.emit()" style="margin-top: 1rem;">
+      CONTINUAR COMPRANDO
+    </button>
+  </div>
+}

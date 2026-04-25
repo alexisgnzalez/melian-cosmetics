@@ -1,0 +1,84 @@
+.app-container {
+  height: 100vh;
+}
+
+.cart-sidenav {
+  width: 350px;
+  max-width: 90vw;
+  background-color: var(--mat-sys-surface, #fff);
+}
+
+.app-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+  background-color: var(--melian-bg-light);
+  color: var(--melian-primary);
+  border-bottom: 1px solid #eeeeee;
+
+  .brand-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 1.25rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  
+  .spacer {
+    flex: 1 1 auto;
+  }
+
+  .search-container {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border-bottom: 1px solid var(--melian-text-muted);
+    padding: 0.25rem 0;
+    width: 300px;
+    max-width: 40vw;
+    transition: border-color 0.2s;
+
+    &:focus-within {
+      border-bottom: 1px solid var(--melian-primary);
+    }
+
+    .search-icon {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+      color: var(--melian-primary);
+      margin-right: 0.5rem;
+    }
+
+    .search-input {
+      border: none;
+      background: none;
+      outline: none;
+      width: 100%;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      color: var(--melian-primary);
+
+      &::placeholder {
+        color: var(--melian-text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-size: 0.75rem;
+      }
+    }
+  }
+
+  button {
+    color: var(--melian-primary);
+  }
+}
+
+.main-content {
+  padding: 0; /* Fenty uses full width edge-to-edge for grids often, or minimal padding */
+  max-width: 100%;
+  margin: 0;
+}

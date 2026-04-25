@@ -1,0 +1,60 @@
+<div class="quick-shop-header">
+  <h2>Quick Shop</h2>
+  <button mat-icon-button (click)="close.emit()" aria-label="Close">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<mat-divider></mat-divider>
+
+<div class="quick-shop-content">
+  <div class="product-image">
+    <img [src]="imageUrl" [alt]="product.name">
+  </div>
+
+  <div class="product-info">
+    <h1 class="brand-title">MELIAN</h1>
+    <h3 class="product-name">{{ product.name }}</h3>
+    
+    <div class="product-rating">
+      <mat-icon>star</mat-icon>
+      <mat-icon>star</mat-icon>
+      <mat-icon>star</mat-icon>
+      <mat-icon>star</mat-icon>
+      <mat-icon>star_half</mat-icon>
+      <span class="review-count">(124)</span>
+    </div>
+
+    <div class="price-container">
+      @if (product.discount > 0) {
+        <span class="original-price">${{ product.sellingPrice }}</span>
+      }
+      <span class="final-price">${{ product.sellingPrice - (product.discount || 0) }}</span>
+    </div>
+
+    <div class="description">
+      <p>{{ product.description || 'Dedicated to real results. This formula is designed to deliver visible improvements to your skin texture and tone.' }}</p>
+    </div>
+
+    <div class="actions">
+      <div class="quantity-selector">
+        <button mat-icon-button (click)="decrement()">
+          <mat-icon>remove</mat-icon>
+        </button>
+        <span>{{ quantity() }}</span>
+        <button mat-icon-button (click)="increment()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+      
+      <div class="total-price-row">
+        <span>Total:</span>
+        <span class="price-value">${{ finalPrice }}</span>
+      </div>
+
+      <button class="add-to-bag-btn" (click)="addToBag()" [disabled]="product.available <= 0">
+        AGREGAR A LA BOLSA
+      </button>
+    </div>
+  </div>
+</div>
