@@ -61,7 +61,7 @@ export class OrderService {
     // Extract first name
     const firstName = orderData.customerName.split(' ')[0] || orderData.customerName;
 
-    const message = `Hola ${firstName}
+    const message = `Hola ${firstName} \u{1F49C}\u{1F484}\u{2728}
 Tu pedido es el ${orderId}
 Esta es tu cuenta:
 

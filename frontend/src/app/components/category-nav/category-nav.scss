@@ -26,11 +26,22 @@
 
   @media (max-width: 768px) {
     padding: 0 1rem;
-    gap: 1.5rem;
+    gap: 1rem;
   }
 
   &::-webkit-scrollbar {
     display: none; /* WebKit */
+  }
+}
+
+.category-items {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+
+  @media (max-width: 768px) {
+    flex-direction: row-reverse;
+    gap: 1.5rem;
   }
 }
 

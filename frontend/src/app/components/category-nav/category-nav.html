@@ -7,13 +7,15 @@
       {{ getTranslatedCategory('All') }}
     </button>
     
-    @for (category of categories; track category) {
-      <button 
-        class="category-chip" 
-        [class.active]="activeCategory === category"
-        (click)="selectCategory(category)">
-        {{ getTranslatedCategory(category) }}
-      </button>
-    }
+    <div class="category-items">
+      @for (category of categories; track category) {
+        <button 
+          class="category-chip" 
+          [class.active]="activeCategory === category"
+          (click)="selectCategory(category)">
+          {{ getTranslatedCategory(category) }}
+        </button>
+      }
+    </div>
   </div>
 </div>
