@@ -1,0 +1,79 @@
+<div class="checkout-header">
+  <button mat-icon-button (click)="backToCart()" aria-label="Volver al Carrito">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <h2>Información de Envío</h2>
+  <button mat-icon-button (click)="close()" aria-label="Cerrar">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<div class="checkout-content">
+  <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()" class="checkout-form">
+    
+    <div class="form-group">
+      <input id="customerName" type="text" formControlName="customerName" placeholder="Nombre Completo *" [class.invalid]="checkoutForm.get('customerName')?.invalid && checkoutForm.get('customerName')?.touched">
+    </div>
+
+    <div class="form-group">
+      <input id="customerPhone" type="tel" formControlName="customerPhone" placeholder="Teléfono *" [class.invalid]="checkoutForm.get('customerPhone')?.invalid && checkoutForm.get('customerPhone')?.touched">
+    </div>
+
+    <div class="form-group">
+      <input id="customerCity" type="text" formControlName="customerCity" placeholder="Ciudad *" [class.invalid]="checkoutForm.get('customerCity')?.invalid && checkoutForm.get('customerCity')?.touched">
+    </div>
+
+    <div class="form-group delivery-method-group">
+      <label class="radio-label">
+        <input type="radio" formControlName="deliveryMethod" value="delivery">
+        <span>Delivery / Envío Nacional</span>
+      </label>
+      <label class="radio-label">
+        <input type="radio" formControlName="deliveryMethod" value="pickup">
+        <span>Pickup</span>
+      </label>
+    </div>
+    
+    <div class="delivery-notice" *ngIf="checkoutForm.get('deliveryMethod')?.value === 'pickup'">
+      Hacemos entregas personales en Sambil La Candelaria.
+    </div>
+    <div class="delivery-notice" *ngIf="checkoutForm.get('deliveryMethod')?.value === 'delivery'">
+      Hacemos delivery a toda Venezuela (MRW, ZOOM, Domesa).
+    </div>
+
+    <div class="payment-method-section">
+      <label class="section-label">Método de Pago</label>
+      <div class="payment-method-grid">
+        <label class="payment-card">
+          <input type="radio" formControlName="paymentMethod" value="Pago Móvil">
+          <span>Pago Móvil</span>
+        </label>
+        <label class="payment-card">
+          <input type="radio" formControlName="paymentMethod" value="Binance">
+          <span>Binance</span>
+        </label>
+        <label class="payment-card">
+          <input type="radio" formControlName="paymentMethod" value="Zinli">
+          <span>Zinli</span>
+        </label>
+        <label class="payment-card">
+          <input type="radio" formControlName="paymentMethod" value="Mony">
+          <span>Mony</span>
+        </label>
+      </div>
+    </div>
+
+  </form>
+</div>
+
+<div class="checkout-footer">
+  <div class="total-row">
+    <span>Total a Pagar</span>
+    <span class="price">${{ cartService.totalPrice() | number:'1.2-2' }}</span>
+  </div>
+  <p class="shipping-notice">El costo de envío se calculará por WhatsApp.</p>
+  <button class="checkout-btn" (click)="onSubmit()" [disabled]="isSubmitting || checkoutForm.invalid">
+    <span class="btn-text">Pagar Vía WhatsApp</span>
+    <mat-icon>send</mat-icon>
+  </button>
+</div>

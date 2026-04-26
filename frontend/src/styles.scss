@@ -21,6 +21,7 @@ $melian-theme: mat.define-theme((
   @include mat.all-component-themes($melian-theme);
   
   --melian-primary: #5e1262; /* Brand Deep Purple */
+  --melian-primary-rgb: 94, 18, 98;
   --melian-accent: #d4af37; /* Metallic Gold */
   --melian-bg-light: #fcfbfc; /* Pearl White */
   --melian-text-main: #333333;

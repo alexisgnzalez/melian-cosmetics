@@ -13,7 +13,19 @@ export class CategoryNav {
   @Output() categoryChange = new EventEmitter<string>();
 
   getTranslatedCategory(category: string): string {
-    return category;
+    if (!category) return '';
+    const translations: { [key: string]: string } = {
+      'all': 'All',
+      'accesories': 'Accesorios',
+      'accessories': 'Accesorios',
+      'body': 'Cuerpo',
+      'eyes': 'Ojos',
+      'face': 'Rostro',
+      'lips': 'Labios',
+      'skincare': 'Skincare'
+    };
+    const lowerCat = category.toLowerCase();
+    return translations[lowerCat] || category;
   }
 
   selectCategory(category: string) {

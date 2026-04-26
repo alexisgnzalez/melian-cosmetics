@@ -1,7 +1,7 @@
 import { Injectable, signal } from '@angular/core';
 import { Product } from '../models/product.model';
 
-export type DrawerState = 'none' | 'cart' | 'quick-shop';
+export type DrawerState = 'none' | 'cart' | 'quick-shop' | 'checkout';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +12,10 @@ export class DrawerService {
 
   openCart() {
     this.activeDrawer.set('cart');
+  }
+
+  openCheckout() {
+    this.activeDrawer.set('checkout');
   }
 
   openQuickShop(product: Product) {

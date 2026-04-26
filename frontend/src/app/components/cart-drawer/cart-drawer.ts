@@ -5,6 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { CartService } from '../../services/cart.service';
 import { PocketbaseService } from '../../services/pocketbase.service';
+import { DrawerService } from '../../services/drawer.service';
 
 @Component({
   selector: 'app-cart-drawer',
@@ -17,7 +18,8 @@ export class CartDrawer {
 
   constructor(
     public cartService: CartService,
-    private pbService: PocketbaseService
+    private pbService: PocketbaseService,
+    private drawerService: DrawerService
   ) {}
 
   getImageUrl(item: any): string {
@@ -36,6 +38,6 @@ export class CartDrawer {
   }
 
   checkout() {
-    this.close.emit();
+    this.drawerService.openCheckout();
   }
 }

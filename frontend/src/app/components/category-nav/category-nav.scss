@@ -1,21 +1,33 @@
+:host {
+  display: block;
+  position: sticky;
+  top: var(--header-height, 65px);
+  z-index: 999;
+}
+
 .category-nav-container {
+  display: flex;
+  justify-content: center;
   width: 100%;
   background-color: var(--melian-bg-light);
   border-bottom: 1px solid #eeeeee;
-  position: sticky;
-  top: 64px; /* Adjust based on header height, assumes sticky header */
-  z-index: 999;
 }
 
 .category-scroll-wrapper {
   display: flex;
   overflow-x: auto;
+  max-width: 100%; /* Prevents layout from blowing out */
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none;  /* Internet Explorer 10+ */
   padding: 0 2rem;
   gap: 2rem;
   align-items: center;
-  justify-content: center;
+  /* Flex-start is default, allows smooth scrolling of overflowing items */
+
+  @media (max-width: 768px) {
+    padding: 0 1rem;
+    gap: 1.5rem;
+  }
 
   &::-webkit-scrollbar {
     display: none; /* WebKit */

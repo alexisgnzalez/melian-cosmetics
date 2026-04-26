@@ -17,12 +17,17 @@
           (close)="drawerService.closeDrawer()">
         </app-quick-shop-drawer>
       }
+    } @else if (drawerService.activeDrawer() === 'checkout') {
+      <app-checkout-drawer></app-checkout-drawer>
     }
   </mat-sidenav>
 
   <mat-sidenav-content>
     <mat-toolbar class="app-toolbar" color="primary">
-      <span class="brand-title">{{ title() }}</span>
+      <div class="brand-container">
+        <img src="/apple-touch-icon.png" alt="Melian Cosmetics Logo" class="brand-logo">
+        <span class="brand-title">{{ title() }}</span>
+      </div>
       
       <span class="spacer"></span>
       

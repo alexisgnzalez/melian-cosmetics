@@ -16,17 +16,32 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 2rem;
+  padding: 0.5rem 2rem;
   background-color: var(--melian-bg-light);
   color: var(--melian-primary);
   border-bottom: 1px solid #eeeeee;
+  height: auto;
+  min-height: 64px;
+  flex-wrap: wrap;
 
-  .brand-title {
-    font-family: 'Playfair Display', serif;
-    font-weight: 700;
-    font-size: 1.5rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
+  .brand-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    .brand-logo {
+      height: 36px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .brand-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
   }
   
   .spacer {
@@ -75,6 +90,34 @@
 
   button {
     color: var(--melian-primary);
+  }
+
+  @media (max-width: 768px) {
+    padding: 0.5rem 1rem;
+    
+    .brand-container {
+      gap: 0.5rem;
+
+      .brand-logo {
+        height: 28px;
+      }
+
+      .brand-title {
+        font-size: 1.125rem;
+        letter-spacing: 0.1em;
+      }
+    }
+
+    .search-container {
+      order: 4; /* Push to next line */
+      width: 100%;
+      max-width: 100%;
+      margin-top: 0.5rem;
+    }
+
+    .spacer:last-of-type {
+      display: none; /* Hide second spacer to keep icon right-aligned */
+    }
   }
 }
 
