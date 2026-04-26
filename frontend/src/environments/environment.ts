@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  pocketbaseUrl: 'http://127.0.0.1:8090'
+  pocketbaseUrl: 'https://meliancosmetics.pockethost.io/'
 };
