@@ -61,7 +61,11 @@ export class OrderService {
     // Extract first name
     const firstName = orderData.customerName.split(' ')[0] || orderData.customerName;
 
-    const message = `Hola ${firstName} \u{1F49C}\u{1F484}\u{2728}
+    // Emojis render fine on mobile WhatsApp but show as garbled text on desktop WhatsApp Web
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent || '');
+    const icons = isMobile ? ' \u{1F49C}\u{1F484}\u{2728}' : '';
+
+    const message = `Hola ${firstName}${icons}
 Tu pedido es el ${orderId}
 Esta es tu cuenta:
 
