@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { Product } from '../../models/product.model';
+import { Product, getDiscountedPrice, getDiscountPercent } from '../../models/product.model';
 import { PocketbaseService } from '../../services/pocketbase.service';
 import { CartService } from '../../services/cart.service';
 import { DrawerService } from '../../services/drawer.service';
@@ -17,8 +17,6 @@ import { DrawerService } from '../../services/drawer.service';
 export class ProductCard implements OnInit {
   @Input({ required: true }) product!: Product;
   isAdded = false;
-  rating = 0;
-  reviews = 0;
   fullStars: number[] = [];
   hasHalfStar = false;
 
@@ -28,27 +26,10 @@ export class ProductCard implements OnInit {
     private drawerService: DrawerService
   ) {}
 
-  private hashCode(str: string): number {
-    let hash = 0;
-    for (let i = 0; i < str.length; i++) {
-      const char = str.charCodeAt(i);
-      hash = ((hash << 5) - hash) + char;
-      hash = hash & hash;
-    }
-    return Math.abs(hash);
-  }
-
   ngOnInit() {
-    const hash = this.hashCode(this.product.id);
-    
-    // Rating between 4.0 and 5.0 (steps of 0.5)
-    const ratingOptions = [4.0, 4.5, 5.0];
-    this.rating = ratingOptions[hash % ratingOptions.length];
-    this.reviews = (hash % 800) + 15;
-
-    const fullCount = Math.floor(this.rating);
+    const fullCount = Math.floor(this.product.rating);
     this.fullStars = Array(fullCount).fill(0);
-    this.hasHalfStar = this.rating % 1 !== 0;
+    this.hasHalfStar = this.product.rating % 1 !== 0;
   }
 
   get imageUrl(): string {
@@ -59,7 +40,11 @@ export class ProductCard implements OnInit {
   }
 
   get finalPrice(): number {
-    return this.product.sellingPrice - (this.product.discount || 0);
+    return getDiscountedPrice(this.product);
+  }
+
+  get discountPercent(): number {
+    return getDiscountPercent(this.product);
   }
 
   get cartQuantity(): number {

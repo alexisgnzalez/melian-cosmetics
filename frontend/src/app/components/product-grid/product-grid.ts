@@ -10,7 +10,7 @@ import { SearchService } from '../../services/search.service';
   selector: 'app-product-grid',
   imports: [CommonModule, ProductCard, CategoryNav],
   templateUrl: './product-grid.html',
-  styleUrl: './product-grid.scss',
+  styleUrl: './product-grid.scss'
 })
 export class ProductGrid implements OnInit {
   products = signal<Product[]>([]);

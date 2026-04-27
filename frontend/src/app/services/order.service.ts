@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { PocketbaseService } from './pocketbase.service';
 import { CartItem } from './cart.service';
+import { getDiscountedPrice } from '../models/product.model';
 
 export interface OrderData {
   customerName: string;
@@ -48,9 +49,10 @@ export class OrderService {
   }
 
   private generateWhatsAppLink(orderData: OrderData, orderId: string, bcvRate: number | null): string {
-    const itemsList = orderData.cartItems.map(item => 
-      `•  ${item.quantity} ${item.product.name}  ${item.product.sellingPrice - (item.product.discount || 0)}$`
-    ).join('\n');
+    const itemsList = orderData.cartItems.map(item => {
+      const unitPrice = getDiscountedPrice(item.product);
+      return `•  ${item.quantity} ${item.product.name}  ${unitPrice}$`;
+    }).join('\n');
 
     let totalLine = `Total: ${orderData.totalAmount}$`;
     if (bcvRate) {

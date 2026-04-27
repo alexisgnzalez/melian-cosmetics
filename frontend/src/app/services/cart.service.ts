@@ -1,5 +1,5 @@
 import { Injectable, computed, signal } from '@angular/core';
-import { Product } from '../models/product.model';
+import { Product, getDiscountedPrice } from '../models/product.model';
 
 export interface CartItem {
   product: Product;
@@ -19,7 +19,9 @@ export class CartService {
   );
 
   public totalPrice = computed(() => 
-    this.itemsSignal().reduce((acc, item) => acc + (item.product.sellingPrice - item.product.discount) * item.quantity, 0)
+    this.itemsSignal().reduce((acc, item) => 
+      acc + getDiscountedPrice(item.product) * item.quantity
+    , 0)
   );
 
   addToCart(product: Product, quantity: number = 1) {

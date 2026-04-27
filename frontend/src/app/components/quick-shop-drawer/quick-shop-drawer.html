@@ -23,14 +23,14 @@
       @if (hasHalfStar) {
         <mat-icon>star_half</mat-icon>
       }
-      <span class="review-count">({{reviews}})</span>
+      <span class="review-count">({{product.reviews}})</span>
     </div>
 
     <div class="price-container">
       @if (product.discount > 0) {
         <span class="original-price">${{ product.sellingPrice }}</span>
       }
-      <span class="final-price">${{ product.sellingPrice - (product.discount || 0) }}</span>
+      <span class="final-price">${{ unitPrice | number:'1.0-2' }}</span>
     </div>
 
     <div class="description">

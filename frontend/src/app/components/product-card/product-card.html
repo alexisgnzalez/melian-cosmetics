@@ -1,7 +1,13 @@
 <div class="product-card" (click)="openQuickShop()">
   <div class="image-container">
     <img [src]="imageUrl" [alt]="product.name">
-    
+
+    @if (discountPercent > 0) {
+      <div class="discount-badge">
+        <span class="discount-text">{{ discountPercent }}% OFF</span>
+      </div>
+    }
+
     @if (cartQuantity > 0) {
       <div class="cart-badge">
         <mat-icon>shopping_bag</mat-icon>
@@ -24,7 +30,7 @@
       @if (hasHalfStar) {
         <mat-icon>star_half</mat-icon>
       }
-      <span class="review-count">({{reviews}})</span>
+      <span class="review-count">({{product.reviews}})</span>
     </div>
     <div class="price-container">
       @if (product.discount > 0) {
